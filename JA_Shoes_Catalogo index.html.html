@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J&A Shoes — Catálogo 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', sans-serif; background: #F0F4FF; color: #1a1a2e; }
+
+  /* COVER */
+  .cover {
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
+    padding: 70px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .cover::after {
+    content: '';
+    position: absolute; bottom: -60px; left: -60px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 30px;
+    padding: 6px 22px;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .brand { font-size: 72px; font-weight: 700; color: #fff; line-height: 1; }
+  .brand span { color: #90CAF9; }
+  .brand-sub { font-size: 28px; font-weight: 500; color: #BBDEFB; margin-top: 4px; margin-bottom: 20px; letter-spacing: 6px; }
+  .divider { width: 60px; height: 2px; background: rgba(255,255,255,0.4); margin: 0 auto 20px; border-radius: 2px; }
+  .tagline { font-size: 13px; color: rgba(255,255,255,0.65); letter-spacing: 4px; text-transform: uppercase; }
+
+  /* INFO BAR */
+  .info-bar {
+    background: #0D47A1;
+    padding: 16px 24px;
+    display: flex; justify-content: center;
+    gap: 40px; flex-wrap: wrap;
+  }
+  .info-item { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; }
+  .info-item .dot { width: 6px; height: 6px; border-radius: 50%; background: #90CAF9; }
+
+  /* SECTION HEADER */
+  .section-header {
+    padding: 40px 28px 12px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .sec-line { flex: 1; height: 1px; background: #C5D8F7; }
+  .sec-title {
+    font-size: 10px; font-weight: 600; color: #1976D2;
+    letter-spacing: 4px; text-transform: uppercase; white-space: nowrap;
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1px;
+    background: #C5D8F7;
+    margin: 0 0 1px;
+  }
+
+  .card {
+    background: #fff;
+    padding: 18px 14px 16px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 10px;
+    transition: background 0.2s;
+  }
+  .card:hover { background: #EEF4FF; }
+
+  .img-wrap {
+    width: 100%; aspect-ratio: 1;
+    background: #EEF4FF;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .img-wrap svg { width: 58%; height: 58%; opacity: 0.22; }
+  .ref-num {
+    position: absolute; bottom: 6px; right: 8px;
+    font-size: 9px; color: #90CAF9; font-weight: 600; letter-spacing: 1px;
+  }
+
+  .ref-label { font-size: 10px; color: #90A4AE; letter-spacing: 1px; font-weight: 600; }
+
+  .sizes { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; width: 100%; }
+  .size {
+    background: #E3F2FD; color: #1565C0;
+    font-size: 10px; font-weight: 600;
+    padding: 3px 8px; border-radius: 10px;
+  }
+  .size.na { background: #F5F5F5; color: #bbb; }
+
+  /* WHATSAPP BUTTON */
+  .wa-section {
+    background: #fff;
+    padding: 32px 24px;
+    text-align: center;
+    border-top: 1px solid #E3F2FD;
+  }
+  .wa-title { font-size: 16px; font-weight: 600; color: #1565C0; margin-bottom: 6px; }
+  .wa-sub { font-size: 13px; color: #78909C; margin-bottom: 20px; }
+  .wa-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: #fff;
+    padding: 14px 32px; border-radius: 50px;
+    text-decoration: none; font-size: 15px; font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .wa-btn:hover { background: #1ebe5a; transform: scale(1.02); }
+  .wa-btn svg { width: 22px; height: 22px; fill: #fff; }
+
+  /* FOOTER */
+  .footer {
+    background: #0D47A1;
+    padding: 36px 24px;
+    text-align: center;
+  }
+  .footer-brand { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .footer-brand span { color: #90CAF9; }
+  .footer-sub { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; }
+  .footer-pills { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px; padding: 7px 18px;
+    color: #fff; font-size: 11px;
+  }
+  .copy { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 24px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="badge">Colección 2026</div>
+  <div class="brand">J<span>&</span>A</div>
+  <div class="brand-sub">SHOES</div>
+  <div class="divider"></div>
+  <div class="tagline">Tu estilo · Tu camino</div>
+</div>
+
+<div class="info-bar">
+  <div class="info-item"><div class="dot"></div> Envíos a todo Colombia</div>
+  <div class="info-item"><div class="dot"></div> Pago contra entrega</div>
+  <div class="info-item"><div class="dot"></div> Calidad garantizada</div>
+</div>
+
+<div class="section-header">
+  <div class="sec-line"></div>
+  <div class="sec-title">Colección completa — 182 referencias</div>
+  <div class="sec-line"></div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="wa-section">
+  <div class="wa-title">¿Te gustó algún modelo?</div>
+  <div class="wa-sub">Escríbenos por WhatsApp con la referencia y la talla</div>
+  <a class="wa-btn" href="https://wa.me/573125363013" target="_blank">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    Pedir por WhatsApp
+  </a>
+</div>
+
+<div class="footer">
+  <div class="footer-brand">J<span>&</span>A Shoes</div>
+  <div class="footer-sub">Tu estilo · Tu camino</div>
+  <div class="footer-pills">
+    <div class="pill">📦 Envíos nacionales</div>
+    <div class="pill">✅ Calidad premium</div>
+    <div class="pill">💳 Pago contra entrega</div>
+  </div>
+  <div class="copy">© 2026 J&A Shoes · Catálogo Colección 2026</div>
+</div>
+
+<script>
+const shoes = [
+  { ref: 'UF-001', sizes: [18] }, { ref: 'UF-002', sizes: [36] }, { ref: 'UF-003', sizes: [37] },
+  { ref: 'UF-004', sizes: [35] }, { ref: 'UF-005', sizes: [40,41] }, { ref: 'UF-006', sizes: [38] },
+  { ref: 'UF-007', sizes: [35,36,37,38,39,40] }, { ref: 'UF-008', sizes: [34,35,36,38] },
+  { ref: 'UF-009', sizes: [36] }, { ref: 'UF-010', sizes: [34,35,37,38,39,40,41,43] },
+  { ref: 'UF-011', sizes: [37] }, { ref: 'UF-012', sizes: [35,36,37,38,39,40] },
+  { ref: 'UF-013', sizes: [35] }, { ref: 'UF-014', sizes: [35,37,38,43] },
+  { ref: 'UF-015', sizes: [36] }, { ref: 'UF-016', sizes: [38] },
+  { ref: 'UF-017', sizes: [37] }, { ref: 'UF-018', sizes: [36] },
+  { ref: 'UF-019', sizes: [35,36,38] }, { ref: 'UF-020', sizes: [36] },
+  { ref: 'UF-021', sizes: [36] }, { ref: 'UF-022', sizes: [36,37,38] },
+  { ref: 'UF-023', sizes: [37] }, { ref: 'UF-024', sizes: [37] },
+  { ref: 'UF-025', sizes: [37] }, { ref: 'UF-026', sizes: [32,33,36,37,39,40,41,43] },
+  { ref: 'UF-027', sizes: [38] }, { ref: 'UF-028', sizes: [35] },
+  { ref: 'UF-029', sizes: [35,36,40] }, { ref: 'UF-030', sizes: [] },
+  { ref: 'UF-031', sizes: [36] }, { ref: 'UF-032', sizes: [35] },
+  { ref: 'UF-033', sizes: [36] }, { ref: 'UF-034', sizes: [37,39] },
+  { ref: 'UF-035', sizes: [40] }, { ref: 'UF-036', sizes: [34,41,42] },
+  { ref: 'UF-037', sizes: [25] }, { ref: 'UF-038', sizes: [30] },
+  { ref: 'UF-039', sizes: [22] }, { ref: 'UF-040', sizes: [28] },
+  { ref: 'UF-041', sizes: [25,26] }, { ref: 'UF-042', sizes: [26] },
+  { ref: 'UF-043', sizes: [22] }, { ref: 'UF-044', sizes: [30] },
+  { ref: 'UF-045', sizes: [40] }, { ref: 'UF-046', sizes: [33] },
+  { ref: 'UF-047', sizes: [35] }, { ref: 'UF-048', sizes: [27] },
+  { ref: 'UF-049', sizes: [30,32] }, { ref: 'UF-050', sizes: [25,30] },
+  { ref: 'UF-051', sizes: [35,36] }, { ref: 'UF-052', sizes: [36,37,38,42,43] },
+  { ref: 'UF-053', sizes: [37,38,39,40,41,42] }, { ref: 'UF-054', sizes: [40] },
+  { ref: 'UF-055', sizes: [27] }, { ref: 'UF-056', sizes: [23] },
+  { ref: 'UF-057', sizes: [36] }, { ref: 'UF-058', sizes: [26,27,29,30,32] },
+  { ref: 'UF-059', sizes: [35,36,37,38,40] }, { ref: 'UF-060', sizes: [36] },
+  { ref: 'UF-061', sizes: [34] }, { ref: 'UF-062', sizes: [35] },
+  { ref: 'UF-063', sizes: [37] }, { ref: 'UF-064', sizes: [35] },
+  { ref: 'UF-065', sizes: [37] }, { ref: 'UF-066', sizes: [37] },
+  { ref: 'UF-067', sizes: [36] }, { ref: 'UF-068', sizes: [35,36] },
+  { ref: 'UF-069', sizes: [22] }, { ref: 'UF-070', sizes: [35,36] },
+  { ref: 'UF-071', sizes: [40] }, { ref: 'UF-072', sizes: [37] },
+  { ref: 'UF-073', sizes: [35,36,37,39,40] }, { ref: 'UF-074', sizes: [36,37] },
+  { ref: 'UF-075', sizes: [36,39] }, { ref: 'UF-076', sizes: [37] },
+  { ref: 'UF-077', sizes: [38,40] }, { ref: 'UF-078', sizes: [37,38,39,42,43] },
+  { ref: 'UF-079', sizes: [36] }, { ref: 'UF-080', sizes: [35] },
+  { ref: 'UF-081', sizes: [34,35,38,41] }, { ref: 'UF-082', sizes: [35,36] },
+  { ref: 'UF-083', sizes: [37] }, { ref: 'UF-084', sizes: [37,38,39,40,41,42] },
+  { ref: 'UF-085', sizes: [36,37,38,39,41,42] }, { ref: 'UF-086', sizes: [37,39,41,42] },
+  { ref: 'UF-087', sizes: [35,36] }, { ref: 'UF-088', sizes: [37] },
+  { ref: 'UF-089', sizes: [34,35,37,38,40] }, { ref: 'UF-090', sizes: [35,36,40,41,42] },
+  { ref: 'UF-091', sizes: [36] }, { ref: 'UF-092', sizes: [36] },
+  { ref: 'UF-093', sizes: [36] }, { ref: 'UF-094', sizes: [39] },
+  { ref: 'UF-095', sizes: [39] }, { ref: 'UF-096', sizes: [21] },
+  { ref: 'UF-097', sizes: [27] }, { ref: 'UF-098', sizes: [21] },
+  { ref: 'UF-099', sizes: [22] }, { ref: 'UF-100', sizes: [37] },
+  { ref: 'UF-101', sizes: [37] }, { ref: 'UF-102', sizes: [30] },
+  { ref: 'UF-103', sizes: [32,34,38] }, { ref: 'UF-104', sizes: [37] },
+  { ref: 'UF-105', sizes: [38] }, { ref: 'UF-106', sizes: [28] },
+  { ref: 'UF-107', sizes: [35] }, { ref: 'UF-108', sizes: [37] },
+  { ref: 'UF-109', sizes: [43] }, { ref: 'UF-110', sizes: [37] },
+  { ref: 'UF-111', sizes: [35] }, { ref: 'UF-112', sizes: [35] },
+  { ref: 'UF-113', sizes: [29] }, { ref: 'UF-114', sizes: [37] },
+  { ref: 'UF-115', sizes: [36] }, { ref: 'UF-116', sizes: [35] },
+  { ref: 'UF-117', sizes: [41,42,43] }, { ref: 'UF-118', sizes: [43] },
+  { ref: 'UF-119', sizes: [41] }, { ref: 'UF-120', sizes: [31] },
+  { ref: 'UF-121', sizes: [39] }, { ref: 'UF-122', sizes: [28] },
+  { ref: 'UF-123', sizes: [40] }, { ref: 'UF-124', sizes: [36] },
+  { ref: 'UF-125', sizes: [22,27,39] }, { ref: 'UF-126', sizes: [37] },
+  { ref: 'UF-127', sizes: [37] }, { ref: 'UF-128', sizes: [37] },
+  { ref: 'UF-129', sizes: [27,29,34] }, { ref: 'UF-130', sizes: [] },
+  { ref: 'UF-131', sizes: [39] }, { ref: 'UF-132', sizes: [37] },
+  { ref: 'UF-133', sizes: [29] }, { ref: 'UF-134', sizes: [26] },
+  { ref: 'UF-135', sizes: [36] }, { ref: 'UF-136', sizes: [34] },
+  { ref: 'UF-137', sizes: [35] }, { ref: 'UF-138', sizes: [26] },
+  { ref: 'UF-139', sizes: [38] }, { ref: 'UF-140', sizes: [38] },
+  { ref: 'UF-141', sizes: [37] }, { ref: 'UF-142', sizes: [34,35] },
+  { ref: 'UF-143', sizes: [36,38] }, { ref: 'UF-144', sizes: [30,33] },
+  { ref: 'UF-145', sizes: [22,39] }, { ref: 'UF-146', sizes: [37] },
+  { ref: 'UF-147', sizes: [21] }, { ref: 'UF-148', sizes: [37] },
+  { ref: 'UF-149', sizes: [39] }, { ref: 'UF-150', sizes: [38] },
+  { ref: 'UF-151', sizes: [37] }, { ref: 'UF-152', sizes: [40] },
+  { ref: 'UF-153', sizes: [37] }, { ref: 'UF-154', sizes: [41] },
+  { ref: 'UF-155', sizes: [35] }, { ref: 'UF-156', sizes: [38] },
+  { ref: 'UF-157', sizes: [27,32] }, { ref: 'UF-158', sizes: [] },
+  { ref: 'UF-159', sizes: [22] }, { ref: 'UF-160', sizes: [23] },
+  { ref: 'UF-161', sizes: [29] }, { ref: 'UF-162', sizes: [39] },
+  { ref: 'UF-163', sizes: [36] }, { ref: 'UF-164', sizes: [35,39] },
+  { ref: 'UF-165', sizes: [40] }, { ref: 'UF-166', sizes: [36] },
+  { ref: 'UF-167', sizes: [35,36,37] }, { ref: 'UF-168', sizes: [40,41,42,43] },
+  { ref: 'UF-169', sizes: [22,23,27,28,39] }, { ref: 'UF-170', sizes: [35,36,38] },
+  { ref: 'UF-171', sizes: [32,34,35,37,38,40] }, { ref: 'UF-172', sizes: [36,37,39,41,42] },
+  { ref: 'UF-173', sizes: [39,40,41] }, { ref: 'UF-174', sizes: [37,38,39,40,42,43] },
+  { ref: 'UF-175', sizes: [37,39] }, { ref: 'UF-176', sizes: [35] },
+  { ref: 'UF-177', sizes: [38,40] }, { ref: 'UF-178', sizes: [23] },
+  { ref: 'UF-179', sizes: [31] }, { ref: 'UF-180', sizes: [22] },
+  { ref: 'UF-181', sizes: [36] }, { ref: 'UF-182', sizes: [39] },
+];
+
+const icon = `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z" fill="#1976D2"/>
+  <path d="M8 40 C10 38 14 36 20 36 C26 36 30 38 36 38 C42 38 48 36 52 34" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M24 26 L22 18 C22 18 26 16 30 18 L32 26" fill="#1976D2"/>
+</svg>`;
+
+const grid = document.getElementById('grid');
+shoes.forEach(s => {
+  const d = document.createElement('div');
+  d.className = 'card';
+  const pills = s.sizes.length
+    ? s.sizes.map(n => `<span class="size">${n}</span>`).join('')
+    : `<span class="size na">Consultar</span>`;
+  d.innerHTML = `
+    <div class="img-wrap">${icon}<div class="ref-num">#${s.ref.replace('UF-','')}</div></div>
+    <div class="ref-label">Ref. ${s.ref}</div>
+    <div class="sizes">${pills}</div>
+  `;
+  grid.appendChild(d);
+});
+</script>
+</body>
+</html>
