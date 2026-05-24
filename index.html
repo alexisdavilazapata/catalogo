@@ -8,27 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Montserrat', sans-serif; background: #F0F4FF; color: #1a1a2e; }
+  body { font-family: 'Montserrat', sans-serif; background: #F0F4FF; color: #1a1a2e; padding-bottom: 60px; }
 
   /* COVER */
   .cover {
     background: linear-gradient(135deg, #0D47A1 0%, #1565C0 50%, #1976D2 100%);
-    padding: 70px 40px;
+    padding: 60px 20px;
     text-align: center;
     position: relative;
     overflow: hidden;
-  }
-  .cover::before {
-    content: '';
-    position: absolute; top: -80px; right: -80px;
-    width: 280px; height: 280px; border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-  }
-  .cover::after {
-    content: '';
-    position: absolute; bottom: -60px; left: -60px;
-    width: 220px; height: 220px; border-radius: 50%;
-    background: rgba(255,255,255,0.04);
   }
   .badge {
     display: inline-block;
@@ -40,112 +28,127 @@
     font-size: 11px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
   }
-  .brand { font-size: 72px; font-weight: 700; color: #fff; line-height: 1; }
+  .brand { font-size: 64px; font-weight: 700; color: #fff; line-height: 1; }
   .brand span { color: #90CAF9; }
-  .brand-sub { font-size: 28px; font-weight: 500; color: #BBDEFB; margin-top: 4px; margin-bottom: 20px; letter-spacing: 6px; }
-  .divider { width: 60px; height: 2px; background: rgba(255,255,255,0.4); margin: 0 auto 20px; border-radius: 2px; }
-  .tagline { font-size: 13px; color: rgba(255,255,255,0.65); letter-spacing: 4px; text-transform: uppercase; }
+  .brand-sub { font-size: 24px; font-weight: 500; color: #BBDEFB; margin-top: 4px; margin-bottom: 16px; letter-spacing: 6px; }
+  .divider { width: 60px; height: 2px; background: rgba(255,255,255,0.4); margin: 0 auto 16px; border-radius: 2px; }
+  .tagline { font-size: 12px; color: rgba(255,255,255,0.65); letter-spacing: 4px; text-transform: uppercase; }
 
   /* INFO BAR */
   .info-bar {
     background: #0D47A1;
-    padding: 16px 24px;
+    padding: 14px 20px;
     display: flex; justify-content: center;
-    gap: 40px; flex-wrap: wrap;
+    gap: 24px; flex-wrap: wrap;
   }
-  .info-item { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; }
+  .info-item { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 12px; }
   .info-item .dot { width: 6px; height: 6px; border-radius: 50%; background: #90CAF9; }
+
+  /* FILTERS SECTION */
+  .filter-section {
+    background: #fff;
+    padding: 20px;
+    margin: 15px auto;
+    max-width: 1200px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(13, 71, 161, 0.05);
+    text-align: center;
+  }
+  .filter-title {
+    font-size: 13px; font-weight: 600; color: #1565C0;
+    margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .filter-container {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+  }
+  .filter-btn {
+    background: #EEF4FF; color: #1565C0; border: 1px solid #C5D8F7;
+    padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .filter-btn:hover { background: #E3F2FD; }
+  .filter-btn.active { background: #1976D2; color: #fff; border-color: #1976D2; }
 
   /* SECTION HEADER */
   .section-header {
-    padding: 40px 28px 12px;
+    padding: 20px 20px 12px;
     display: flex; align-items: center; gap: 14px;
+    max-width: 1200px; margin: 0 auto;
   }
   .sec-line { flex: 1; height: 1px; background: #C5D8F7; }
   .sec-title {
-    font-size: 10px; font-weight: 600; color: #1976D2;
-    letter-spacing: 4px; text-transform: uppercase; white-space: nowrap;
+    font-size: 11px; font-weight: 600; color: #1976D2;
+    letter-spacing: 3px; text-transform: uppercase; white-space: nowrap;
   }
 
   /* GRID */
+  .grid-container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1px;
-    background: #C5D8F7;
-    margin: 0 0 1px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 10px 0;
   }
 
   .card {
     background: #fff;
-    padding: 18px 14px 16px;
+    border-radius: 12px;
+    padding: 14px;
     display: flex; flex-direction: column;
-    align-items: center; gap: 10px;
-    transition: background 0.2s;
+    align-items: center; gap: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    border: 1px solid #E3F2FD;
+    position: relative;
   }
-  .card:hover { background: #EEF4FF; }
 
   .img-wrap {
     width: 100%; aspect-ratio: 1;
     background: #EEF4FF;
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
   }
-  .img-wrap svg { width: 58%; height: 58%; opacity: 0.22; }
   .ref-num {
-    position: absolute; bottom: 6px; right: 8px;
-    font-size: 9px; color: #90CAF9; font-weight: 600; letter-spacing: 1px;
+    position: absolute; top: 8px; left: 8px;
+    font-size: 10px; color: #1565C0; background: rgba(227, 242, 253, 0.9);
+    padding: 2px 8px; border-radius: 6px; font-weight: 700;
   }
 
-  .ref-label { font-size: 10px; color: #90A4AE; letter-spacing: 1px; font-weight: 600; }
+  .ref-label { font-size: 12px; color: #455A64; font-weight: 700; }
 
-  .sizes { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; width: 100%; }
-  .size {
+  .sizes-title { font-size: 10px; color: #90A4AE; text-transform: uppercase; letter-spacing: 0.5px; }
+  .sizes { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; width: 100%; min-height: 24px; }
+  
+  /* Tallas interactivas */
+  .size-select-btn {
     background: #E3F2FD; color: #1565C0;
-    font-size: 10px; font-weight: 600;
-    padding: 3px 8px; border-radius: 10px;
+    font-size: 11px; font-weight: 600; border: none;
+    padding: 4px 9px; border-radius: 6px; cursor: pointer;
+    transition: all 0.15s;
   }
-  .size.na { background: #F5F5F5; color: #bbb; }
+  .size-select-btn:hover { background: #BBDEFB; }
+  .size-select-btn.selected { background: #0D47A1; color: #fff; transform: scale(1.05); }
+  
+  .size.na { background: #F5F5F5; color: #bbb; font-size: 11px; padding: 4px 12px; border-radius: 6px; }
 
-  /* WHATSAPP BUTTON */
-  .wa-section {
-    background: #fff;
-    padding: 32px 24px;
-    text-align: center;
-    border-top: 1px solid #E3F2FD;
+  /* BOTÓN COMPRA CARD */
+  .order-btn {
+    width: 100%; background: #25D366; color: #fff; border: none;
+    padding: 10px; border-radius: 8px; font-family: 'Montserrat', sans-serif;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    text-decoration: none; transition: background 0.2s;
   }
-  .wa-title { font-size: 16px; font-weight: 600; color: #1565C0; margin-bottom: 6px; }
-  .wa-sub { font-size: 13px; color: #78909C; margin-bottom: 20px; }
-  .wa-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: #25D366; color: #fff;
-    padding: 14px 32px; border-radius: 50px;
-    text-decoration: none; font-size: 15px; font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: background 0.2s, transform 0.1s;
-  }
-  .wa-btn:hover { background: #1ebe5a; transform: scale(1.02); }
-  .wa-btn svg { width: 22px; height: 22px; fill: #fff; }
+  .order-btn:hover { background: #1ebe5a; }
+  .order-btn svg { width: 16px; height: 16px; fill: #fff; }
 
   /* FOOTER */
-  .footer {
-    background: #0D47A1;
-    padding: 36px 24px;
-    text-align: center;
-  }
+  .footer { background: #0D47A1; padding: 40px 20px; text-align: center; margin-top: 40px; }
   .footer-brand { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .footer-brand span { color: #90CAF9; }
   .footer-sub { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; }
-  .footer-pills { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-  .pill {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 20px; padding: 7px 18px;
-    color: #fff; font-size: 11px;
-  }
   .copy { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 24px; }
 </style>
 </head>
@@ -165,33 +168,26 @@
   <div class="info-item"><div class="dot"></div> Calidad garantizada</div>
 </div>
 
+<div class="filter-section">
+  <div class="filter-title">🔍 Filtrar por tu Talla:</div>
+  <div class="filter-container" id="filters-container">
+    <button class="filter-btn active" onclick="filterTalla('TODAS')">Todas</button>
+  </div>
+</div>
+
 <div class="section-header">
   <div class="sec-line"></div>
-  <div class="sec-title">Colección completa — 182 referencias</div>
+  <div class="sec-title" id="counter-label">Colección completa</div>
   <div class="sec-line"></div>
 </div>
 
-<div class="grid" id="grid"></div>
-
-<div class="wa-section">
-  <div class="wa-title">¿Te gustó algún modelo?</div>
-  <div class="wa-sub">Escríbenos por WhatsApp con la referencia y la talla</div>
-  <a class="wa-btn" href="https://wa.me/573125363013" target="_blank">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-    Pedir por WhatsApp
-  </a>
+<div class="grid-container">
+  <div class="grid" id="grid"></div>
 </div>
 
 <div class="footer">
   <div class="footer-brand">J<span>&</span>A Shoes</div>
   <div class="footer-sub">Tu estilo · Tu camino</div>
-  <div class="footer-pills">
-    <div class="pill">📦 Envíos nacionales</div>
-    <div class="pill">✅ Calidad premium</div>
-    <div class="pill">💳 Pago contra entrega</div>
-  </div>
   <div class="copy">© 2026 J&A Shoes · Catálogo Colección 2026</div>
 </div>
 
@@ -289,26 +285,131 @@ const shoes = [
   { ref: 'UF-181', sizes: [36] }, { ref: 'UF-182', sizes: [39] },
 ];
 
-const icon = `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z" fill="#1976D2"/>
-  <path d="M8 40 C10 38 14 36 20 36 C26 36 30 38 36 38 C42 38 48 36 52 34" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M24 26 L22 18 C22 18 26 16 30 18 L32 26" fill="#1976D2"/>
-</svg>`;
+const WHATSAPP_NUMBER = "573125363013";
+let currentFilter = 'TODAS';
+const selectedSizesForOrder = {}; 
 
-const grid = document.getElementById('grid');
-shoes.forEach(s => {
-  const d = document.createElement('div');
-  d.className = 'card';
-  const pills = s.sizes.length
-    ? s.sizes.map(n => `<span class="size">${n}</span>`).join('')
-    : `<span class="size na">Consultar</span>`;
-  d.innerHTML = `
-    <div class="img-wrap">${icon}<div class="ref-num">#${s.ref.replace('UF-','')}</div></div>
-    <div class="ref-label">Ref. ${s.ref}</div>
-    <div class="sizes">${pills}</div>
-  `;
-  grid.appendChild(d);
+// Extraer y ordenar todas las tallas únicas para armar la botonera de arriba
+const allSizes = Array.from(new Set(shoes.flatMap(s => s.sizes))).sort((a, b) => a - b);
+const filtersContainer = document.getElementById('filters-container');
+
+allSizes.forEach(talla => {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn';
+  btn.textContent = talla;
+  btn.onclick = () => filterTalla(talla, btn);
+  filtersContainer.appendChild(btn);
 });
+
+// Función para renderizar las tarjetas del catálogo
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  
+  let count = 0;
+
+  shoes.forEach(s => {
+    // Si la tarjeta no cumple el filtro de talla superior, no la muestra
+    if (currentFilter !== 'TODAS' && !s.sizes.includes(Number(currentFilter))) {
+      return;
+    }
+    
+    count++;
+
+    const d = document.createElement('div');
+    d.className = 'card';
+    
+    // Configurar cuál talla arranca seleccionada por defecto dentro de la tarjeta
+    if (!selectedSizesForOrder[s.ref]) {
+      selectedSizesForOrder[s.ref] = s.sizes.length ? s.sizes[0] : null;
+    }
+    
+    // Si hay un filtro general activo, forzar a que marque esa talla dentro de la tarjeta
+    if (currentFilter !== 'TODAS' && s.sizes.includes(Number(currentFilter))) {
+      selectedSizesForOrder[s.ref] = Number(currentFilter);
+    }
+
+    // Armar el HTML de las tallas disponibles en la tarjeta
+    const pills = s.sizes.length
+      ? s.sizes.map(n => {
+          const isSelected = selectedSizesForOrder[s.ref] === n ? 'selected' : '';
+          return `<button class="size-select-btn ${isSelected}" onclick="selectSize('${s.ref}', ${n}, this)">${n}</button>`;
+        }).join('')
+      : `<span class="size na">Consultar</span>`;
+
+    d.innerHTML = `
+      <div class="img-wrap">
+        <img src="img/${s.ref}.jpg" alt="Ref ${s.ref}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 64 64\' fill=\'none\'><rect width=\'64\' height=\'64\' fill=\'%23EEF4FF\'/><path d=\'M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z\' fill=\'%231976D2\'/></svg>'">
+        <div class="ref-num">#${s.ref.replace('UF-','')}</div>
+      </div>
+      <div class="ref-label">Ref. ${s.ref}</div>
+      <div class="sizes-title">Tallas disponibles:</div>
+      <div class="sizes">${pills}</div>
+      <button class="order-btn" onclick="sendWhatsApp('${s.ref}')">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pedir Talla <span id="btn-text-${s.ref}">${selectedSizesForOrder[s.ref] || 'A consultar'}</span>
+      </button>
+    `;
+    grid.appendChild(d);
+  });
+
+  // Mostrar la cantidad de modelos encontrados con el filtro activo
+  document.getElementById('counter-label').textContent = currentFilter === 'TODAS' 
+    ? `Colección completa — ${count} referencias` 
+    : `Modelos encontrados en Talla ${currentFilter} — ${count} referencias`;
+}
+
+// Acción al clickear una talla dentro de la tarjeta
+function selectSize(ref, talla, element) {
+  selectedSizesForOrder[ref] = talla;
+  
+  // Cambiar visualmente el botón seleccionado en esa tarjeta
+  const parent = element.parentElement;
+  parent.querySelectorAll('.size-select-btn').forEach(b => b.classList.remove('selected'));
+  element.classList.add('selected');
+  
+  // Actualizar el texto del botón de WhatsApp de la tarjeta
+  document.getElementById(`btn-text-${ref}`).textContent = talla;
+}
+
+// Acción de la botonera de filtros superior
+function filterTalla(talla, clickedBtn) {
+  currentFilter = talla;
+  
+  // Cambiar estado activo en los botones de filtro superiores
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (clickedBtn) {
+    clickedBtn.classList.add('active');
+  } else {
+    document.querySelector('.filter-btn').classList.add('active');
+  }
+  
+  renderGrid();
+}
+
+// CONSTRUCCIÓN DEL MENSAJE DE WHATSAPP DINÁMICO
+function sendWhatsApp(ref) {
+  const tallaSeleccionada = selectedSizesForOrder[ref];
+  let mensaje = "";
+  
+  if (tallaSeleccionada) {
+    // Si seleccionó una talla, arma este mensaje automatizado detallado
+    mensaje = `¡Hola J&A Shoes! 👋 Estoy interesado en el catálogo virtual. Me gustó el modelo con la *Ref. ${ref}* en *Talla ${tallaSeleccionada}*. ¿Está disponible? 👟`;
+  } else {
+    // Si el producto no tenía tallas (ej. Ref. UF-030), pide consultar stock general
+    mensaje = `¡Hola J&A Shoes! 👋 Estoy interesado en el modelo con la *Ref. ${ref}*. Quisiera consultar la disponibilidad de tallas para este diseño. 👟`;
+  }
+  
+  // Formatear el texto para URL de internet
+  const urlMensaje = encodeURIComponent(mensaje);
+  const linkCompleto = `https://wa.me/${WHATSAPP_NUMBER}?text=${urlMensaje}`;
+  
+  // Abrir WhatsApp en pestaña nueva
+  window.open(linkCompleto, '_blank');
+}
+
+// Carga inicial de la aplicación
+renderGrid();
 </script>
 </body>
 </html>
