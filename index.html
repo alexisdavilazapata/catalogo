@@ -110,10 +110,23 @@
     display: flex; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
   }
+  
+  /* Ajuste de imagen real */
+  .shoe-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .card:hover .shoe-img {
+    transform: scale(1.05);
+  }
+
   .ref-num {
     position: absolute; top: 8px; left: 8px;
     font-size: 10px; color: #1565C0; background: rgba(227, 242, 253, 0.9);
     padding: 2px 8px; border-radius: 6px; font-weight: 700;
+    z-index: 2;
   }
 
   .ref-label { font-size: 12px; color: #455A64; font-weight: 700; }
@@ -121,7 +134,6 @@
   .sizes-title { font-size: 10px; color: #90A4AE; text-transform: uppercase; letter-spacing: 0.5px; }
   .sizes { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; width: 100%; min-height: 24px; }
   
-  /* Tallas interactivas */
   .size-select-btn {
     background: #E3F2FD; color: #1565C0;
     font-size: 11px; font-weight: 600; border: none;
@@ -289,7 +301,6 @@ const WHATSAPP_NUMBER = "573125363013";
 let currentFilter = 'TODAS';
 const selectedSizesForOrder = {}; 
 
-// Extraer y ordenar todas las tallas únicas para armar la botonera de arriba
 const allSizes = Array.from(new Set(shoes.flatMap(s => s.sizes))).sort((a, b) => a - b);
 const filtersContainer = document.getElementById('filters-container');
 
@@ -301,7 +312,6 @@ allSizes.forEach(talla => {
   filtersContainer.appendChild(btn);
 });
 
-// Función para renderizar las tarjetas del catálogo
 function renderGrid() {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
@@ -309,7 +319,6 @@ function renderGrid() {
   let count = 0;
 
   shoes.forEach(s => {
-    // Si la tarjeta no cumple el filtro de talla superior, no la muestra
     if (currentFilter !== 'TODAS' && !s.sizes.includes(Number(currentFilter))) {
       return;
     }
@@ -319,17 +328,14 @@ function renderGrid() {
     const d = document.createElement('div');
     d.className = 'card';
     
-    // Configurar cuál talla arranca seleccionada por defecto dentro de la tarjeta
     if (!selectedSizesForOrder[s.ref]) {
       selectedSizesForOrder[s.ref] = s.sizes.length ? s.sizes[0] : null;
     }
     
-    // Si hay un filtro general activo, forzar a que marque esa talla dentro de la tarjeta
     if (currentFilter !== 'TODAS' && s.sizes.includes(Number(currentFilter))) {
       selectedSizesForOrder[s.ref] = Number(currentFilter);
     }
 
-    // Armar el HTML de las tallas disponibles en la tarjeta
     const pills = s.sizes.length
       ? s.sizes.map(n => {
           const isSelected = selectedSizesForOrder[s.ref] === n ? 'selected' : '';
@@ -339,7 +345,7 @@ function renderGrid() {
 
     d.innerHTML = `
       <div class="img-wrap">
-        <img src="img/${s.ref}.jpg" alt="Ref ${s.ref}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 64 64\' fill=\'none\'><rect width=\'64\' height=\'64\' fill=\'%23EEF4FF\'/><path d=\'M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z\' fill=\'%231976D2\'/></svg>'">
+        <img class="shoe-img" src="img/${s.ref}.jpg" alt="Ref ${s.ref}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 64 64\' fill=\'none\'><rect width=\'64\' height=\'64\' fill=\'%23EEF4FF\'/><path d=\'M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z\' fill=\'%231976D2\'/></svg>'">
         <div class="ref-num">#${s.ref.replace('UF-','')}</div>
       </div>
       <div class="ref-label">Ref. ${s.ref}</div>
@@ -353,62 +359,45 @@ function renderGrid() {
     grid.appendChild(d);
   });
 
-  // Mostrar la cantidad de modelos encontrados con el filtro activo
   document.getElementById('counter-label').textContent = currentFilter === 'TODAS' 
     ? `Colección completa — ${count} referencias` 
     : `Modelos encontrados en Talla ${currentFilter} — ${count} referencias`;
 }
 
-// Acción al clickear una talla dentro de la tarjeta
 function selectSize(ref, talla, element) {
   selectedSizesForOrder[ref] = talla;
-  
-  // Cambiar visualmente el botón seleccionado en esa tarjeta
   const parent = element.parentElement;
   parent.querySelectorAll('.size-select-btn').forEach(b => b.classList.remove('selected'));
   element.classList.add('selected');
-  
-  // Actualizar el texto del botón de WhatsApp de la tarjeta
   document.getElementById(`btn-text-${ref}`).textContent = talla;
 }
 
-// Acción de la botonera de filtros superior
 function filterTalla(talla, clickedBtn) {
   currentFilter = talla;
-  
-  // Cambiar estado activo en los botones de filtro superiores
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   if (clickedBtn) {
     clickedBtn.classList.add('active');
   } else {
     document.querySelector('.filter-btn').classList.add('active');
   }
-  
   renderGrid();
 }
 
-// CONSTRUCCIÓN DEL MENSAJE DE WHATSAPP DINÁMICO
 function sendWhatsApp(ref) {
   const tallaSeleccionada = selectedSizesForOrder[ref];
   let mensaje = "";
   
   if (tallaSeleccionada) {
-    // Si seleccionó una talla, arma este mensaje automatizado detallado
     mensaje = `¡Hola J&A Shoes! 👋 Estoy interesado en el catálogo virtual. Me gustó el modelo con la *Ref. ${ref}* en *Talla ${tallaSeleccionada}*. ¿Está disponible? 👟`;
   } else {
-    // Si el producto no tenía tallas (ej. Ref. UF-030), pide consultar stock general
     mensaje = `¡Hola J&A Shoes! 👋 Estoy interesado en el modelo con la *Ref. ${ref}*. Quisiera consultar la disponibilidad de tallas para este diseño. 👟`;
   }
   
-  // Formatear el texto para URL de internet
   const urlMensaje = encodeURIComponent(mensaje);
-  const linkCompleto = `https://wa.me/${WHATSAPP_NUMBER}?text=${urlMensaje}`;
-  
-  // Abrir WhatsApp en pestaña nueva
+  const linkCompleto = `https://wa.me/573125363013?text=${urlMensaje}`;
   window.open(linkCompleto, '_blank');
 }
 
-// Carga inicial de la aplicación
 renderGrid();
 </script>
 </body>
