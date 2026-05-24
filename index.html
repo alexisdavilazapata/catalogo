@@ -297,7 +297,7 @@ const shoes = [
   { ref: 'UF-181', sizes: [36] }, { ref: 'UF-182', sizes: [39] },
 ];
 
-const WHATSAPP_NUMBER = "573125363013";
+const WHATSAPP_NUMBER = "573239852395";
 let currentFilter = 'TODAS';
 const selectedSizesForOrder = {}; 
 
@@ -345,7 +345,8 @@ function renderGrid() {
 
     d.innerHTML = `
       <div class="img-wrap">
-        <img class="shoe-img" src="img/${s.ref}.jpg" alt="Ref ${s.ref}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 64 64\' fill=\'none\'><rect width=\'64\' height=\'64\' fill=\'%23EEF4FF\'/><path d=\'M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z\' fill=\'%231976D2\'/></svg>'">
+        <img class="shoe-img" src="img/${s.ref}.jpeg" alt="Ref ${s.ref}" 
+             onerror="this.onerror=null; this.src='img/${s.ref}.jpg'; this.setAttribute('onerror', 'this.onerror=null; this.src=\'img/${s.ref}.jpg.jpeg\'; this.setAttribute(\'onerror\', \'this.src=\\\'data:image/svg+xml;utf8,<svg xmlns=\\\'http://www.w3.org/2000/svg\\\' viewBox=\\\\'0 0 64 64\\\\\' fill=\\\'none\\\'>%3Crect width=\\\'64\\\' height=\\\'64\\\' fill=\\\'%23EEF4FF\\\'/%3E%3Cpath d=\\\'M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z\\\' fill=\\\'%231976D2\\\'/%3E%3C/svg%3E\\\'\')');">
         <div class="ref-num">#${s.ref.replace('UF-','')}</div>
       </div>
       <div class="ref-label">Ref. ${s.ref}</div>
