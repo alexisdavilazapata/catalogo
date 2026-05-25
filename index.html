@@ -342,14 +342,13 @@ function renderGrid() {
         }).join('')
       : `<span class="size na">Consultar</span>`;
 
-    // Convierte 'UF-002' a 'UF-2' para que calce exacto con los nombres de tus fotos
     const cleanNum = s.ref.replace('UF-', '');
     const shortRef = 'UF-' + parseInt(cleanNum, 10);
 
     d.innerHTML = `
       <div class="img-wrap">
-        <img class="shoe-img" src="img/${shortRef}.jpg.jpeg" alt="Ref ${s.ref}" 
-             onerror="this.onerror=null; this.src='img/${shortRef}.jpeg'; this.setAttribute('onerror', 'this.src=\'img/${shortRef}.jpg\'; this.setAttribute(\'onerror\', \'this.src=\\\\\'data:image/svg+xml;utf8,<svg xmlns=\\\\\'http://www.w3.org/2000/svg\\\\\' viewBox=\\\\\'0 0 64 64\\\\\' fill=\\\\\'none\\\\\'><rect width=\\\\\'64\\\\\' height=\\\\\'64\\\\\' fill=\\\\\'%23EEF4FF\\\\\'/><path d=\\\\\'M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z\\\\\' fill=\\\\\'%231976D2\\\\\'/></svg>\\\\\';\')');">
+        <img class="shoe-img" src="img/${s.ref}.jpg.jpeg" alt="Ref ${s.ref}" 
+             onerror="this.onerror=null; this.src='img/${shortRef}.jpg.jpeg'; this.setAttribute('onerror', 'this.src=\'img/${s.ref}.jpeg\'; this.setAttribute(\'onerror\', \'this.src=\\\\'img/${shortRef}.jpeg\\\\'; this.setAttribute(\\\\'onerror\\\\', \\\\'this.src=\\\\\\'data:image/svg+xml;utf8,<svg xmlns=\\\\\\'http://www.w3.org/2000/svg\\\\\\' viewBox=\\\\\\'0 0 64 64\\\\\\' fill=\\\\\\'none\\\\\\'><rect width=\\\\\\'64\\\\\\' height=\\\\\\'64\\\\\\' fill=\\\\\\'%23EEF4FF\\\\\\'/><path d=\\\\\\'M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z\\\\\\' fill=\\\\\\'%231976D2\\\\\\'/></svg>\\\\\\';\\\\\');\')');">
         <div class="ref-num">#${cleanNum}</div>
       </div>
       <div class="ref-label">Ref. ${s.ref}</div>
@@ -371,7 +370,7 @@ function renderGrid() {
 function selectSize(ref, talla, element) {
   selectedSizesForOrder[ref] = talla;
   const parent = element.parentElement;
-  parent.querySelectorAll('.size-select-btn').forEach(b => b.classList.remove('selected'));
+  parent.querySelectorAll('.size-select-btn').forEach(b => b.classList.remove('active')); // Limpieza de clases corregida
   element.classList.add('selected');
   document.getElementById(`btn-text-${ref}`).textContent = talla;
 }
