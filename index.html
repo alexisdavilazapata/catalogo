@@ -311,6 +311,35 @@ allSizes.forEach(talla => {
   filtersContainer.appendChild(btn);
 });
 
+// Función externa que maneja inteligentemente las caídas de las fotos sin romper el HTML
+function fixImageSource(imgElement, originalRef) {
+  const cleanNum = originalRef.replace('UF-', '');
+  const shortRef = 'UF-' + parseInt(cleanNum, 10);
+  
+  // Lista ordenada de posibles nombres con los que se guardó la foto
+  const fallbacks = [
+    `img/${shortRef}.jpg.jpeg`, // Ej: img/UF-2.jpg.jpeg
+    `img/${originalRef}.jpg.jpeg`, // Ej: img/UF-002.jpg.jpeg
+    `img/${originalRef}.jpeg`,
+    `img/${shortRef}.jpeg`,
+    `img/${originalRef}.jpg`,
+    `img/${shortRef}.jpg`
+  ];
+
+  // Busca cuál es la ruta que está intentando cargar actualmente
+  const currentSrc = imgElement.getAttribute('src');
+  const currentIndex = fallbacks.indexOf(currentSrc);
+
+  // Si hay un siguiente intento disponible en la lista, lo prueba
+  if (currentIndex < fallbacks.length - 1) {
+    imgElement.src = fallbacks[currentIndex + 1];
+  } else {
+    // Si ya fallaron todas las opciones, deja el diseño de zapato en SVG por defecto
+    imgElement.onerror = null;
+    imgElement.src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'><rect width='64' height='64' fill='%23EEF4FF'/><path d='M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z' fill='%231976D2'/></svg>`;
+  }
+}
+
 function renderGrid() {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
@@ -343,12 +372,10 @@ function renderGrid() {
       : `<span class="size na">Consultar</span>`;
 
     const cleanNum = s.ref.replace('UF-', '');
-    const shortRef = 'UF-' + parseInt(cleanNum, 10);
 
     d.innerHTML = `
       <div class="img-wrap">
-        <img class="shoe-img" src="img/${s.ref}.jpg.jpeg" alt="Ref ${s.ref}" 
-             onerror="this.onerror=null; this.src='img/${shortRef}.jpg.jpeg'; this.setAttribute('onerror', 'this.src=\'img/${s.ref}.jpeg\'; this.setAttribute(\'onerror\', \'this.src=\\\\'img/${shortRef}.jpeg\\\\'; this.setAttribute(\\\\'onerror\\\\', \\\\'this.src=\\\\\\'data:image/svg+xml;utf8,<svg xmlns=\\\\\\'http://www.w3.org/2000/svg\\\\\\' viewBox=\\\\\\'0 0 64 64\\\\\\' fill=\\\\\\'none\\\\\\'><rect width=\\\\\\'64\\\\\\' height=\\\\\\'64\\\\\\' fill=\\\\\\'%23EEF4FF\\\\\\'/><path d=\\\\\\'M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z\\\\\\' fill=\\\\\\'%231976D2\\\\\\'/></svg>\\\\\\';\\\\\');\')');">
+        <img class="shoe-img" src="img/${s.ref}.jpg.jpeg" alt="Ref ${s.ref}" onerror="fixImageSource(this, '${s.ref}')">
         <div class="ref-num">#${cleanNum}</div>
       </div>
       <div class="ref-label">Ref. ${s.ref}</div>
@@ -370,7 +397,7 @@ function renderGrid() {
 function selectSize(ref, talla, element) {
   selectedSizesForOrder[ref] = talla;
   const parent = element.parentElement;
-  parent.querySelectorAll('.size-select-btn').forEach(b => b.classList.remove('active')); // Limpieza de clases corregida
+  parent.querySelectorAll('.size-select-btn').forEach(b => b.classList.remove('selected'));
   element.classList.add('selected');
   document.getElementById(`btn-text-${ref}`).textContent = talla;
 }
