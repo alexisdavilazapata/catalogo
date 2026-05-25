@@ -311,30 +311,38 @@ allSizes.forEach(talla => {
   filtersContainer.appendChild(btn);
 });
 
-// Función externa que maneja inteligentemente las caídas de las fotos sin romper el HTML
+// Función externa corregida para encontrar tus imágenes reales en GitHub
 function fixImageSource(imgElement, originalRef) {
   const cleanNum = originalRef.replace('UF-', '');
-  const shortRef = 'UF-' + parseInt(cleanNum, 10);
+  const shortRef = 'UF-' + parseInt(cleanNum, 10); // Quita los ceros a la izquierda (Ej: UF-2)
   
-  // Lista ordenada de posibles nombres con los que se guardó la foto
+  // Lista con todas las variantes reales de cómo se guardan estos archivos
   const fallbacks = [
-    `img/${shortRef}.jpg.jpeg`, // Ej: img/UF-2.jpg.jpeg
-    `img/${originalRef}.jpg.jpeg`, // Ej: img/UF-002.jpg.jpeg
+    `img/${originalRef}.jpg.jpeg`, // img/UF-002.jpg.jpeg
+    `img/${shortRef}.jpg.jpeg`,    // img/UF-2.jpg.jpeg
+    `img/${originalRef}.jpg.JPEG`, // Variantes con mayúsculas por si acaso
+    `img/${shortRef}.jpg.JPEG`,
     `img/${originalRef}.jpeg`,
     `img/${shortRef}.jpeg`,
     `img/${originalRef}.jpg`,
-    `img/${shortRef}.jpg`
+    `img/${shortRef}.jpg`,
+    `img/${originalRef}.PNG`,
+    `img/${originalRef}.png`
   ];
 
-  // Busca cuál es la ruta que está intentando cargar actualmente
-  const currentSrc = imgElement.getAttribute('src');
-  const currentIndex = fallbacks.indexOf(currentSrc);
+  // Detecta en qué intento va
+  const currentSrc = imgElement.getAttribute('data-try-src') || imgElement.getAttribute('src');
+  let currentIndex = fallbacks.findIndex(f => currentSrc.endsWith(f));
 
-  // Si hay un siguiente intento disponible en la lista, lo prueba
+  // Si no encuentra la ruta actual en la lista, empieza desde el primer fallback
+  if (currentIndex === -1) currentIndex = 0;
+
   if (currentIndex < fallbacks.length - 1) {
-    imgElement.src = fallbacks[currentIndex + 1];
+    const nextSrc = fallbacks[currentIndex + 1];
+    imgElement.setAttribute('data-try-src', nextSrc);
+    imgElement.src = nextSrc;
   } else {
-    // Si ya fallaron todas las opciones, deja el diseño de zapato en SVG por defecto
+    // Si ya de verdad ninguna opción funcionó para esa referencia, muestra el zapato azul
     imgElement.onerror = null;
     imgElement.src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'><rect width='64' height='64' fill='%23EEF4FF'/><path d='M8 40 C8 40 12 28 24 26 C32 24 40 28 48 26 C54 24 58 28 58 32 C58 36 54 42 44 44 C34 46 8 44 8 40Z' fill='%231976D2'/></svg>`;
   }
